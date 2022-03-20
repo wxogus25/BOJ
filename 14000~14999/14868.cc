@@ -1,4 +1,4 @@
-// 2022-03-01 19:33:52
+// 2022-03-01 20:04:48
 #include <iostream>
 #include <algorithm>
 #include <stdio.h>
@@ -36,6 +36,10 @@ typedef struct v{
 
 bool check(int x, int y){
     return !(x < 1 || x > n || y < 1 || y > n);
+}
+
+bool cmp(v &a, v &b){
+    return a.group == b.group && a.level == b.level && a.x == b.x && a.y == b.y;
 }
 
 int main(){
@@ -78,28 +82,23 @@ int main(){
         v tmp = q.front();
         q.pop();
         if(lev != tmp.level){
-            for(int i=1;i<=n;i++){
-                for(int j=1;j<=n;j++){
-                    if(g[i][j]){
-                        int a, b;
-                        if(g[i+1][j] && i+1 <= n){
-                            a = find(g[i][j]);
-                            b = find(g[i+1][j]);
-                            merge(a, b);
+            q.push(tmp);
+            while(!cmp(tmp, q.front())){
+                v r = q.front();
+                q.pop(); q.push(r);
+                for(int i=0;i<4;i++){
+                    if(check(r.x+dx[i], r.y+dy[i]) && g[r.x+dx[i]][r.y+dy[i]]){
+                        int a = find(r.group), b = find(g[r.x+dx[i]][r.y+dy[i]]);
+                        merge(a, b);
+                        ans = min(ans, d[a]);
+                        if(ans + k == 0){
+                            cout << lev + 1;
+                            return 0;
                         }
-                        if(g[i][j+1] && j+1 <= n){
-                            a = find(g[i][j]);
-                            b = find(g[i][j+1]);
-                            merge(a, b);
-                        }
-                        ans = min(ans, d[find(g[i][j])]);
                     }
                 }
             }
-            if(ans + k == 0){
-                cout << lev + 1;
-                return 0;
-            }
+            q.pop();
             lev = tmp.level;
         }
         for(int i=0;i<4;i++){
