@@ -1,4 +1,4 @@
-// 2022-03-03 16:52:52
+// 2022-03-03 16:54:37
 #include <iostream>
 #include <algorithm>
 #include <stdio.h>
@@ -19,7 +19,7 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0); cout.tie(0);
 
-    int n, m, q, x, tmp;
+    int n, m, q, x;
     cin >> m;
     for(int i=1;i<=m;i++){
         cin >> d[i];
@@ -34,16 +34,11 @@ int main(){
     cin >> q;
     while(q--){
         cin >> n >> x;
-        tmp = 0;
         for(int i=0;i<20;i++){
             if(n & (1 << i)){
-                if(tmp){
-                    tmp = dp[tmp][i];
-                }else{
-                    tmp = dp[x][i];
-                }
+                x = dp[x][i];
             }
         }
-        cout << tmp << '\n';
+        cout << x << '\n';
     }
 }
