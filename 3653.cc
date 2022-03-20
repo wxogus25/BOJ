@@ -1,4 +1,4 @@
-// 2022-03-13 12:20:53
+// 2022-03-13 12:22:45
 #include <bits/stdc++.h>
 #define FASTIO                   \
 	ios::sync_with_stdio(false); \
@@ -64,14 +64,14 @@ int main()
 	while (t--)
 	{
 		cin >> n >> m;
-		int size = n + m + 1;
+		int size = n + m;
 		segTree seg(size);
 		for (int i = 1; i <= n; i++)
 		{
-			d[i] = n - i + 1;
-			seg.update(i, 1);
+			d[i] = n - i;
+			seg.update(i - 1, 1);
 		}
-		for (int i = 1; i <= m; i++)
+		for (int i = 0; i < m; i++)
 		{
 			cin >> c;
 			seg.update(d[c], 0);
