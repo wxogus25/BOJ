@@ -1,4 +1,4 @@
-// 2022-03-10 17:02:22
+// 2022-03-10 17:02:43
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -36,7 +36,7 @@ int main(){
     fill(dis, dis+n, inf);
     dis[s] = -don[s];
     bool check = false, reach = false;
-    for(int k=0;k<n*2;k++){
+    for(int k=0;k<=n;k++){
         for(int i=0;i<n;i++){
             if(dis[i] != inf){
                 for(pii x : edge[i]){
