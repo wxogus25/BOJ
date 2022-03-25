@@ -1,4 +1,4 @@
-// 2022-02-25 22:47:47
+// 2022-02-25 22:47:55
 #include <iostream>
 #include <algorithm>
 #include <stdio.h>
@@ -38,6 +38,6 @@ int main(){
         cin >> d[i];
     }
     cout << fixed;
-    cout.precision(10);
+    cout.precision(9);
     cout << ans(0, 15, 15);
 }
